@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Qtynew</th>
+      <th>Qtyused</th>
+      <th>Comment</th>
+      <th>Document</th>
+      <th>Item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lines.each do |line| %>
+      <tr>
+        <td><%= line.qtynew %></td>
+        <td><%= line.qtyused %></td>
+        <td><%= line.comment %></td>
+        <td><%= line.document %></td>
+        <td><%= line.item %></td>
+        <td><%= link_to 'Show', line %></td>
+        <td><%= link_to 'Edit', edit_line_path(line) %></td>
+        <td><%= link_to 'Destroy', line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Line', new_line_path %>

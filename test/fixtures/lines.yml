@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qtynew: 9.99
+  qtyused: 9.99
+  comment: MyText
+  document_id: 
+  item_id: 
+
+two:
+  qtynew: 9.99
+  qtyused: 9.99
+  comment: MyText
+  document_id: 
+  item_id: 

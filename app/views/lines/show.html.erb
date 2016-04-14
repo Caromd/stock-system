@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Qtynew:</strong>
+  <%= @line.qtynew %>
+</p>
+
+<p>
+  <strong>Qtyused:</strong>
+  <%= @line.qtyused %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @line.comment %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @line.document %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @line.item %>
+</p>
+
+<%= link_to 'Edit', edit_line_path(@line) %> |
+<%= link_to 'Back', lines_path %>
