@@ -1,0 +1,128 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets"; 
+@import "bootstrap";
+
+body {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	color: black;
+  background: -webkit-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* W3C */
+        
+        
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #090A3A;
+	font-weight: 100;
+}
+
+h1 {font-size: 2em;}
+
+.container {width: 60%;}
+
+.wrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+#button {
+	border: 1px solid #9B9B9B;
+	padding: .7rem 1.25rem;
+	border-radius: .3rem;
+	outline: none;
+	background: #3783A7;
+	color: white;
+}
+
+header {
+	width: 100%;
+	padding: 2rem 0;
+	border-bottom: 1px solid #E4E4E4;
+	background-color: #3783A7;
+	color: white;
+	#logo {
+		float: left;
+		font-size: 3rem;
+		a {
+			color: white;
+			text-decoration: none;
+			&:hover {
+				color: #50A7C7;
+			}
+		}
+	}
+	nav {
+		float: right;
+		font-size: 1.2rem;
+		a {
+			margin-left: 1.5rem;
+			line-height: 2;
+			color: white;
+			text-decoration: none;
+			&:hover {
+				color: #50A7C7;
+			}
+		}
+	}
+}
+
+a {color: #EBF1F4};
+
+#right {
+  align: right;
+}
+
+form input[type='number']::-webkit-outer-spin-button,
+form input[type='number']::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+abbr[title="required"] {
+  display: none;
+}
+
+#results, #grades {
+	display: inline-block;
+	margin-bottom: 30px;
+}
+
+textarea {
+   resize: none;
+}
+
+select#result_fields.select.required.form-control {width: 100px; font-size: 11px;}
+input#result_fields.numeric.decimal.required.form-control {width: 50px; font-size: 11px;}
+textarea#result_fields.text.optional.form-control {width: 300px; font-size: 11px;}
+
+[id*="report_results_attributes_"] {
+	font-size: 11px;
+	size: 10px;
+}

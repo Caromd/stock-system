@@ -7,8 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+  <header>
+    <div class="wrapper clearfix">
+      <div id="logo">
+        <%= link_to "MK WAREHOUSE STOCK", root_path %>
+      </div>
+      <nav>
+        <%= link_to "LOCATION", locations_path %>
+        <%= link_to "ITEM", items_path %>
+        <%= link_to "DOCUMENT", documents_path %>
+        <%= link_to "LINE", lines_path %>
+        <% if user_signed_in? %>
+          <%= link_to('EDIT USER', edit_user_registration_path) %>
+          <%= link_to('LOG OUT', destroy_user_session_path, :method => :delete) %>        
+        <% else %>
+          <%= link_to "SIGN UP", new_user_registration_path %>
+          <%= link_to('LOG IN', new_user_session_path)  %>
+        <% end %>
+      </nav>
+    </div>
+  </header>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <%= yield %>
+  <div class="wrapper">
+    <%= yield %>
+  </div>
+  </div>
 </body>
 </html>
