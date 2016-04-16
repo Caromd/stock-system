@@ -15,6 +15,9 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    10.times do
+      @line = @document.lines.build
+    end
   end
 
   # GET /documents/1/edit

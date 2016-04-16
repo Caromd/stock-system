@@ -11,23 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
+  <div class="field"><%= f.label :code %><%= f.text_field :code %><%= f.label :docdate %><%= f.date_select :docdate %></div>
+  <div class="field"><%= f.label :comment %><%= f.text_area :comment %></div>
+  <div class="actions"><%= f.submit %></div>
+  
+  <hr>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div id="lines">
+        <table class="table">
+          <tbody id="result_fields">
+            <%= f.fields_for :lines, :html => { :class => 'form-horizontal' } do |line| %>
+              <%= render 'line_fields', f: line %>
+            <% end %>
+            <br>
+          </tbody>
+        </table>
+        <div class="links">
+          <%= link_to_add_association 'Add Line', f, :lines, id: "button" %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :docdate %><br>
-    <%= f.date_select :docdate %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>
