@@ -3,10 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Code</th>
-      <th>Docdate</th>
-      <th>Comment</th>
-      <th>User</th>
+      <th class="col-md-2">Code</th>
+      <th class="col-md-2">Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +12,8 @@
   <tbody>
     <% @documents.each do |document| %>
       <tr>
-        <td><%= document.code %></td>
-        <td><%= document.docdate %></td>
-        <td><%= document.comment %></td>
-        <td><%= document.user %></td>
-        <td><%= link_to 'Show', document %></td>
+        <td class="col-md-2"><%= document.code %></td>
+        <td class="col-md-2"><%= document.docdate %></td>
         <td><%= link_to 'Edit', edit_document_path(document) %></td>
         <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

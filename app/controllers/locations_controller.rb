@@ -10,6 +10,13 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    @items = Location.find_by_sql(
+      ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      FROM documents d
+      JOIN lines l ON l.document_id = d.id
+      JOIN items i on i.id = l.item_id
+      WHERE d.location_id = ?
+      GROUP BY i.code, i.description", params[:id]])
   end
 
   # GET /locations/new
@@ -28,8 +35,8 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
-        format.json { render :show, status: :created, location: @location }
+        format.html { redirect_to locations_url, notice: 'Location was successfully created.' }
+        format.json { render :index, status: :created, location: locations_url }
       else
         format.html { render :new }
         format.json { render json: @location.errors, status: :unprocessable_entity }
@@ -42,8 +49,8 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
-        format.json { render :show, status: :ok, location: @location }
+        format.html { redirect_to locations_url, notice: 'Location was successfully updated.' }
+        format.json { render :index, status: :ok, location: locations_url }
       else
         format.html { render :edit }
         format.json { render json: @location.errors, status: :unprocessable_entity }

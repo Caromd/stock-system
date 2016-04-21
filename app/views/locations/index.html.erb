@@ -1,11 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Locations</h1>
+<h1>LOCATIONS</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th class="col-md-4">Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,9 +11,9 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.name %></td>
-        <td><%= link_to 'Show', location %></td>
+        <td class="col-md-4"><%= location.name %></td>
         <td><%= link_to 'Edit', edit_location_path(location) %></td>
+        <td><%= link_to 'Show', location %></td>
         <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

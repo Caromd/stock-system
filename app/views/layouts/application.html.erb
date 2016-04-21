@@ -17,7 +17,6 @@
         <%= link_to "LOCATION", locations_path %>
         <%= link_to "ITEM", items_path %>
         <%= link_to "DOCUMENT", documents_path %>
-        <%= link_to "LINE", lines_path %>
         <% if user_signed_in? %>
           <%= link_to('EDIT USER', edit_user_registration_path) %>
           <%= link_to('LOG OUT', destroy_user_session_path, :method => :delete) %>        

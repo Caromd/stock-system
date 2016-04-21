@@ -11,7 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field"><%= f.label :code %><%= f.text_field :code %><%= f.label :docdate %><%= f.date_select :docdate %></div>
+  <div class="field">
+      <%= f.label :code %><%= f.text_field :code %>
+      <%= f.label :docdate %><%= f.date_select :docdate %>
+      <%= f.collection_select(:location_id, Location.order(:name), :id, :name, prompt: true) %>
+  </div>
   <div class="field"><%= f.label :comment %><%= f.text_area :comment %></div>
   <div class="actions"><%= f.submit %></div>
   

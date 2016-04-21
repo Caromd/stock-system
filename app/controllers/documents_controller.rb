@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :get_items, only: [:new, :edit]
 
   # GET /documents
   # GET /documents.json
@@ -69,9 +70,15 @@ class DocumentsController < ApplicationController
     def set_document
       @document = Document.find(params[:id])
     end
+    
+    def get_items
+      @items = Item.order("code asc")
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:code, :docdate, :comment, :user_id, lines_attributes: [:id, :qtynew, :qtyused, :comment, :document_id, :item_id])
+      params.require(:document).permit(
+        :code, :docdate, :comment, :user_id, :location_id,
+        lines_attributes: [:id, :qtynew, :qtyused, :comment, :document_id, :item_id])
     end
 end

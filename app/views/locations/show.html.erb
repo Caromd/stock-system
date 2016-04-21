@@ -1,9 +1,25 @@
-<p id="notice"><%= notice %></p>
+<h1>STOCK AT <%= @location.name.upcase %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th class="col-md-2">Code</th>
+      <th class="col-md-4">Description</th>
+      <th class="col-md-1">New</th>
+      <th class="col-md-1">Used</th>
+      <th class="col-md-1">Total</th>
+    </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td class="col-md-2"><%= item.code %></td>
+        <td class="col-md-4"><%= item.description %></td>
+        <td class="col-md-1"><%= item.qtynew %></td>
+        <td class="col-md-1"><%= item.qtyused %></td>
+        <td class="col-md-1"><%= item.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
