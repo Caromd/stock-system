@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :get_items, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new]
 
   # GET /documents
   # GET /documents.json
@@ -28,7 +29,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
+    @document = current_user.documents.new(document_params)
 
     respond_to do |format|
       if @document.save
