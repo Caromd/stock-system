@@ -11,10 +11,9 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td class="col-md-4"><%= location.name %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="col-md-4"><%= link_to location.name, edit_location_path(location) %></td>
+        <td><%= link_to 'Details', location %></td>
+        <td><%= link_to 'X', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
