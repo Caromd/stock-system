@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :get_items, only: [:new, :edit]
+  before_action :get_items, only: [:new, :create, :edit]
   before_action :authenticate_user!, only: [:new]
 
   # GET /documents
@@ -30,7 +30,9 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = current_user.documents.new(document_params)
-
+    10.times do
+      @line = @document.lines.build
+    end
     respond_to do |format|
       if @document.save
         format.html { redirect_to documents_url, notice: 'Document was successfully created.' }

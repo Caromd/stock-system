@@ -15,6 +15,7 @@
         <td class="col-md-2"><%= item.code %></td>
         <td class="col-md-10"><%= item.description %></td>
 <% if false %>       <td class="col-md-1"><%= link_to 'Edit', edit_item_path(item) %></td><% end %>
+        <td><%= link_to 'X', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

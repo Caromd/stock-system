@@ -54,10 +54,23 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy
+ #   @item.destroy
+#    respond_to do |format|
+#      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+#      format.json { head :no_content }
+#    end
+    
+        @item = Item.find(params[:id])
+    if @item.destroy
+      message = "Item destroyed successfully"
+    else
+      message = "Item could not be destroyed"
+    end
+
+
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to items_url, :notice => message }
+      format.json { head :ok }
     end
   end
 

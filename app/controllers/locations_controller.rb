@@ -61,10 +61,33 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-    @location.destroy
+#    @location.destroy
+#    respond_to do |format|
+#      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+#      format.json { head :no_content }
+#    end
+    
+#    respond_to do |format|
+#      if @location.destroy
+#        format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+#        format.json { head :no_content }
+#      else
+#        format.html { render :index }
+#        format.json { render json: @location.errors, status: :unprocessable_entity }
+#      end
+#    end
+    
+    @location = Location.find(params[:id])
+    if @location.destroy
+      message = "Location destroyed successfully"
+    else
+      message = "Location could not be destroyed"
+    end
+
+
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to locations_url, :notice => message }
+      format.json { head :ok }
     end
   end
 
