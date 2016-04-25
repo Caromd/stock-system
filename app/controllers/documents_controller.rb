@@ -30,9 +30,6 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = current_user.documents.new(document_params)
-    10.times do
-      @line = @document.lines.build
-    end
     respond_to do |format|
       if @document.save
         format.html { redirect_to documents_url, notice: 'Document was successfully created.' }
@@ -61,10 +58,18 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
-    @document.destroy
+
+    @document = Document.find(params[:id])
+    if @document.destroy
+      message = "Document destroyed successfully"
+    else
+      message = "Document could not be destroyed"
+    end
+
+
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to documents_url, :notice => message }
+      format.json { head :ok }
     end
   end
 
