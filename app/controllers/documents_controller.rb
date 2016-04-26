@@ -80,13 +80,13 @@ class DocumentsController < ApplicationController
     end
     
     def get_items
-      @items = Item.order("code asc")
+      @items = Item.order(:code)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
       params.require(:document).permit(
         :code, :docdate, :comment, :user_id, :location_id,
-        lines_attributes: [:id, :qtynew, :qtyused, :comment, :document_id, :item_id])
+        lines_attributes: [:id, :qtynew, :qtyused, :comment, :document_id, :item_id, :_destroy])
     end
 end
