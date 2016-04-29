@@ -1,22 +1,30 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:show, :edit, :update, :destroy, :export]
+  before_action :item_summary, only: [:show, :export]
 
   # GET /locations
   # GET /locations.json
   def index
     @locations = Location.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @locations.to_csv, filename: "Locations-#{Date.today}.csv" }
+    end    
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
-    @items = Location.find_by_sql(
-      ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
-      FROM documents d
-      JOIN lines l ON l.document_id = d.id
-      JOIN items i on i.id = l.item_id
-      WHERE d.location_id = ?
-      GROUP BY i.code, i.description", params[:id]])
+  end
+  
+  def export
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename='Item-Quantities-#{@location.name}-#{Date.today}.csv'"
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   # GET /locations/new
@@ -61,22 +69,6 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-#    @location.destroy
-#    respond_to do |format|
-#      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
-#      format.json { head :no_content }
-#    end
-    
-#    respond_to do |format|
-#      if @location.destroy
-#        format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
-#        format.json { head :no_content }
-#      else
-#        format.html { render :index }
-#        format.json { render json: @location.errors, status: :unprocessable_entity }
-#      end
-#    end
-    
     @location = Location.find(params[:id])
     if @location.destroy
       message = "Location destroyed successfully"
@@ -100,5 +92,15 @@ class LocationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
       params.require(:location).permit(:name)
+    end
+    
+    def item_summary
+      @items = Location.find_by_sql(
+      ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      FROM documents d
+      JOIN lines l ON l.document_id = d.id
+      JOIN items i on i.id = l.item_id
+      WHERE d.location_id = ?
+      GROUP BY i.code, i.description", params[:id]])
     end
 end

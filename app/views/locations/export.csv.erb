@@ -1,0 +1,6 @@
+<%- headers = ["Code", "Description", "New", "Used", "Total"] -%>
+<%= CSV.generate_line headers -%>
+<%- @items.each do |i| -%>
+    <%- row = [i.code.strip, i.description, i.qtynew, i.qtyused, i.total] -%>
+    <%= CSV.generate_line row -%>
+<%- end -%>

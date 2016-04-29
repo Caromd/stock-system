@@ -1,5 +1,7 @@
 <h1>LOCATIONS</h1>
-
+<p>
+  <%= link_to "Download Location List", locations_path(format: "csv"), id: "button" %>
+</p>
 <table>
   <thead>
     <tr>
@@ -14,6 +16,7 @@
       <tr>
         <td class="col-md-3"><%= link_to location.name, edit_location_path(location) %></td>
         <td class="col-md-1"><%= link_to 'Details', location %></td>
+        <td class="col-md-1"><%= link_to "CSV", locations_export_path(location, format: "csv") %></td>
         <td class="col-md-1"><%= link_to 'X', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
