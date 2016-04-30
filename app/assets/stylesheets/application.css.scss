@@ -16,15 +16,35 @@
 @import "bootstrap-sprockets"; 
 @import "bootstrap";
 
+/* latin-ext */
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans'), local('JosefinSans'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5j0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans'), local('JosefinSans'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Josefin Sans','Raleway', sans-serif;
     font-weight: 100;
     color: white;
+    font-size: 10;
+    /*
   background: -webkit-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* W3C */
+  /*background:    -moz-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* FF3.6+ */
+  /*background:     -ms-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* IE10 */
+  /*background:      -o-linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* Opera 11.10+ */
+  /*background:         linear-gradient(90deg, #2c3e50 10%, #3498db 90%); /* W3C */
+  background: #30372b;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -34,11 +54,22 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {font-size: 2em;}
 
-.container {width: 90%;}
+.container {width: 90%;
+        border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 2px inset #a196a1;
+
+}
 
 .wrapper {
     width: 90%;
     margin: 0 auto;
+        border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 2px inset #a196a1;
+padding: 2rem;
 }
 
 .clearfix:before, .clearfix:after {
@@ -54,12 +85,12 @@ h1 {font-size: 2em;}
 header {
     width: 100%;
     padding: 2rem 0;
-    border-bottom: 1px solid #E4E4E4;
-    background-color: #3783A7;
+/*    border-bottom: 1px solid #E4E4E4;
+    background-color: #3783A7;*/
     color: white;
     #logo {
         float: left;
-        font-size: 3rem;
+        font-size: 2rem;
         a {
             color: white;
             text-decoration: none;
@@ -99,12 +130,16 @@ a {
 /* All input fields */
 form input {
     color: black;
+            border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 2px inset #a196a1;
 }
 
 /* All Drop down fields */
 form select {
     color: black;
-    font-size: 17px;
+    font-size: 1em;
 }
 
 /* Submit buttons */
@@ -168,21 +203,21 @@ textarea {
 
 /* Document lines blocks (all) */
 [id*="document_lines_attributes_"] {
-    font-size: 17px;
+    font-size: 1em;
     width: 450px;
     color: black;
 }
 
 /* Changes the input blocks for Quantity New */
 form input[placeholder='Quantity New'] {
-    font-size: 17px;
+    font-size: 1em;
     width: 112px;
     color: black;
 }
 
 /* Changes the input blocks for Quantity Used */
 form input[placeholder='Quantity Used'] {
-    font-size: 17px;
+    font-size: 1em;
     width: 112px;
     color: black;
 }

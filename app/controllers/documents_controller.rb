@@ -2,11 +2,12 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :get_items, only: [:new, :create, :edit]
   before_action :authenticate_user!, only: [:new]
+  helper_method :sort_column, :sort_direction
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.order(docdate: :desc)
+    @documents = Document.order(sort_column + " " + sort_direction)
   end
 
   # GET /documents/1
@@ -81,6 +82,14 @@ class DocumentsController < ApplicationController
     
     def get_items
       @items = Item.order(:code)
+    end
+    
+    def sort_column
+      Document.column_names.include?(params[:sort]) ? params[:sort] : "code"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
