@@ -16,25 +16,8 @@
 @import "bootstrap-sprockets"; 
 @import "bootstrap";
 
-/* latin-ext */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans'), local('JosefinSans'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5j0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans'), local('JosefinSans'), url(http://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
 body {
-    font-family: 'Josefin Sans','Raleway', sans-serif;
+    font-family: 'Jura','Raleway', sans-serif;
     font-weight: 100;
     color: white;
     font-size: 10;
@@ -52,24 +35,24 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
 }
 
-h1 {font-size: 2em;}
+h1 {font-size: 1.5em;}
 
-.container {width: 90%;
-        border-radius: 10px 10px 10px 10px;
--moz-border-radius: 10px 10px 10px 10px;
--webkit-border-radius: 10px 10px 10px 10px;
-border: 2px inset #a196a1;
-
+.container {
+    width: 80%;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
 }
 
 .wrapper {
-    width: 90%;
-    margin: 0 auto;
-        border-radius: 10px 10px 10px 10px;
--moz-border-radius: 10px 10px 10px 10px;
--webkit-border-radius: 10px 10px 10px 10px;
-border: 2px inset #a196a1;
-padding: 2rem;
+    width: 100%;
+    margin: 1rem auto;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
+    padding: 1rem;
 }
 
 .clearfix:before, .clearfix:after {
@@ -85,33 +68,15 @@ padding: 2rem;
 header {
     width: 100%;
     padding: 2rem 0;
-/*    border-bottom: 1px solid #E4E4E4;
-    background-color: #3783A7;*/
     color: white;
     #logo {
         float: left;
         font-size: 2rem;
-        a {
-            color: white;
-            text-decoration: none;
-            &:hover {
-                color: black;
-            }
-        }
-    }
+        a {color: white; text-decoration: none; &:hover {color: black; }}}
     nav {
         float: right;
         font-size: 1.2rem;
-        a {
-            margin-left: 1.5rem;
-            line-height: 2;
-            color: white;
-            text-decoration: none;
-            &:hover {
-                color: black;
-            }
-        }
-    }
+        a {margin-left: 1.5rem; line-height: 2; color: white; text-decoration: none; &:hover {color: black;}}}
 }
 
 /* Links */
@@ -130,26 +95,34 @@ a {
 /* All input fields */
 form input {
     color: black;
-            border-radius: 10px 10px 10px 10px;
--moz-border-radius: 10px 10px 10px 10px;
--webkit-border-radius: 10px 10px 10px 10px;
-border: 2px inset #a196a1;
+    padding: .3rem 1.25rem;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
 }
 
 /* All Drop down fields */
 form select {
     color: black;
     font-size: 1em;
+    padding: .3rem 1.25rem;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
 }
 
 /* Submit buttons */
 form input[type='submit'] {
-    margin-top: 10px;
-    border: 1px solid #9B9B9B;
-    padding: .5rem 1.5rem;
-    border-radius: .3rem;
+/*    margin-top: 10px;*/
+    padding: .3rem 1.5rem;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
     outline: none;
-    background: #3783A7;
+    background: #253B3F;
     color: white;
     text-decoration: none;
         &:hover {
@@ -160,10 +133,13 @@ form input[type='submit'] {
 /* New line submit button */
 #button {
     border: 1px solid #9B9B9B;
-    padding: .5rem 1.25rem;
-    border-radius: .3rem;
+    padding: .3rem 1.25rem;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
     outline: none;
-    background: #3783A7;
+    background: #253B3F;
     color: white;
     text-decoration: none;
         &:hover {
@@ -175,6 +151,7 @@ form input[type='submit'] {
 form input[type='text'] {
     margin-bottom: 20px;
     color: black;
+
 }
 
 /* Changes the input blocks for document code */
@@ -190,15 +167,20 @@ textarea {
     width: 1000px;
     height: 26px;
     color: black;
+
 }
 
 /* Changes the input blocks for document comment */
 [id*="document_comment"] {
     margin-top: 10px;
     margin-left: 10px;
-    width: 1000px;
-    height: 26px;
+    width: 50%;
+/*    height: 26px; */
     color: black;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px inset #a196a1;
 }
 
 /* Document lines blocks (all) */
@@ -211,28 +193,21 @@ textarea {
 /* Changes the input blocks for Quantity New */
 form input[placeholder='Quantity New'] {
     font-size: 1em;
-    width: 112px;
-    color: black;
-}
+    width: 10%;
+    color: black;}
 
 /* Changes the input blocks for Quantity Used */
 form input[placeholder='Quantity Used'] {
     font-size: 1em;
-    width: 112px;
+    width: 10%;
     color: black;
 }
 
 /* Date dropdown block left */
-[id*="document_docdate_1i"] {
-    margin-left: 10px;
-}
+[id*="document_docdate_1i"] {margin-left: 10px;}
 
 /* Date dropdown block right */
-[id*="document_docdate_3i"] {
-    margin-right: 40px;
-}
+[id*="document_docdate_3i"] {margin-right: 40px;}
 
 /* Location drop down box */
-[id*="document_location_id"] {
-    margin-left: 10px;
-}
+[id*="document_location_id"] {margin-left: 10px;}

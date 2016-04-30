@@ -3,6 +3,7 @@
 <head>
   <title>Workspace</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Jura', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -27,8 +28,12 @@
       </nav>
     </div>
   </header>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% unless notice.nil? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% unless alert.nil? %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
   <div class="wrapper">
     <%= yield %>
   </div>
