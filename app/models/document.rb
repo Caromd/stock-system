@@ -11,4 +11,15 @@ class Document < ActiveRecord::Base
   def uppercase_code
     code.upcase!
   end
+  
+  def self.to_csv
+      top_line = %w{Code Date Location User Comment}
+  
+      CSV.generate(headers: true) do |csv|
+        csv << top_line
+        all.each do |document|
+          csv << [document.code, document.docdate, document.location.name, document.user.username, document.comment]
+        end
+      end
+  end  
 end

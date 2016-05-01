@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.order(sort_column + " " + sort_direction)
+    @documents = Document.includes(:user).includes(:location).order("#{sort_column} #{sort_direction}")
   end
   
   def pdf
@@ -90,7 +90,15 @@ class DocumentsController < ApplicationController
     end
     
     def sort_column
-      Document.column_names.include?(params[:sort]) ? params[:sort] : "code"
+      if Document.column_names.include?(params[:sort])
+        return params[:sort]
+      elsif params[:sort] = "locations.name"
+        return params[:sort]
+      elsif params[:sort] = "users.username"
+        return params[:sort]
+      else
+        return "code"
+      end
     end
     
     def sort_direction

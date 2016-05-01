@@ -4,8 +4,9 @@
   <thead>
     <tr>
       <th class="col-md-2"><%= sortable "code"%></th>
-      <th class="col-md-2"><%= sortable "docdate"%></th>
-      <th class="col-md-2"><%= sortable "username"%></th>
+      <th class="col-md-2"><%= sortable "docdate", "Date"%></th>
+      <th class="col-md-2"><%= sortable "users.username", "User"%></th>
+      <th class="col-md-2"><%= sortable "locations.name", "Location"%></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td class="col-md-2"><%= link_to document.code, edit_document_path(document) %></td>
         <td class="col-md-2"><%= document.docdate %></td>
         <td class="col-md-2"><%= document.user.username %></td>
+        <td class="col-md-2"><%= document.location.name %></td>
         <td class="col-md-1"><%= link_to 'PDF', pdf_path(document) %></td>
         <td><%= link_to 'X', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

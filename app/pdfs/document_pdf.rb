@@ -1,6 +1,6 @@
 class DocumentPdf < Prawn::Document
     def initialize(document)
-        super({:page_size => 'A4'})
+        super({:page_size => 'A4', :page_layout => :landscape})
         @document = Document.find_by_id(document.id)
         @lines = Line.where(document_id: document.id)
         @user = User.find_by_id(document.user_id)
@@ -24,12 +24,12 @@ class DocumentPdf < Prawn::Document
         @lines.map do |l|
             @item = Item.find_by_id(l.item_id)
             @line_total = l.qtynew.to_s.to_d + l.qtyused.to_s.to_d
-            [@item.code,@item.description,l.qtynew,l.qtyused,@line_total]
+            [@item.code,@item.description,l.qtynew,l.qtyused,@line_total,l.comment]
         end
     end
 
     def line_header
-        ["ITEM CODE","ITEM DESCRIPTION","NEW","USED","TOTAL"]
+        ["ITEM CODE","ITEM DESCRIPTION","NEW","USED","TOTAL","COMMENT"]
     end
 
     def table_data
@@ -42,7 +42,7 @@ class DocumentPdf < Prawn::Document
             self.row_colors = ["DDDDDD", "FFFFFF"]
             self.header = true
             self.cell_style = { size: 9 }
-            self.column_widths = [100,250,50,50,50]
+            self.column_widths = [80,220,40,40,40,260]
         end
     end
 end
