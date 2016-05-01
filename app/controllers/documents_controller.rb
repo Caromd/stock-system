@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :pdf]
   before_action :get_items, only: [:new, :create, :edit]
   before_action :authenticate_user!, only: [:new]
   helper_method :sort_column, :sort_direction
@@ -8,6 +8,11 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.order(sort_column + " " + sort_direction)
+  end
+  
+  def pdf
+    pdf = DocumentPdf.new(@document)
+    send_data pdf.render, filename: @document.code + ".pdf", type: 'application/pdf'
   end
 
   # GET /documents/1

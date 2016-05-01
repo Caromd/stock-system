@@ -29,6 +29,9 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'sass-rails', '~> 5.0'
 # cocoon for nested forms
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
+# Prawn gem to generate PDF
+gem 'prawn', '~> 2.0.2'
+gem 'prawn-table', '~> 0.2.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

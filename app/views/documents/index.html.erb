@@ -16,6 +16,7 @@
         <td class="col-md-2"><%= link_to document.code, edit_document_path(document) %></td>
         <td class="col-md-2"><%= document.docdate %></td>
         <td class="col-md-2"><%= document.user.username %></td>
+        <td class="col-md-1"><%= link_to 'PDF', pdf_path(document) %></td>
         <td><%= link_to 'X', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
