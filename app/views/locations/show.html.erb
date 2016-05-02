@@ -14,7 +14,7 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td class="col-md-2"><%= item.code %></td>
+        <td class="col-md-2"><%= link_to item.code, history_path(@location.id,item.code) %></td>
         <td class="col-md-4"><%= item.description %></td>
         <td class="col-md-1"><%= item.qtynew %></td>
         <td class="col-md-1"><%= item.qtyused %></td>

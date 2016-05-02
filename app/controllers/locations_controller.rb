@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy, :export]
+  before_action :set_location, only: [:show, :edit, :update, :destroy, :export, :history]
   before_action :item_summary, only: [:show, :export]
 
   # GET /locations
@@ -15,6 +15,17 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+  end
+  
+  def history
+    @history = Location.find_by_sql(
+      ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      FROM documents d
+      JOIN lines l ON l.document_id = d.id
+      JOIN items i on i.id = l.item_id
+      WHERE d.location_id = ?
+      AND i.code = ?", params[:id], params[:item_code]])
+    @item_description = Item.find_by_code(params[:item_code])
   end
   
   def export

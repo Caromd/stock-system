@@ -90,14 +90,10 @@ class DocumentsController < ApplicationController
     end
     
     def sort_column
-      if Document.column_names.include?(params[:sort])
-        return params[:sort]
-      elsif params[:sort] = "locations.name"
-        return params[:sort]
-      elsif params[:sort] = "users.username"
-        return params[:sort]
+      unless params[:sort].nil?
+        params[:sort]
       else
-        return "code"
+        "code"
       end
     end
     
