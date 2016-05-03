@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy, :export, :history]
+  before_action :set_location, only: [:show, :edit, :update, :destroy, :export, :history, :hpdf]
   before_action :item_summary, only: [:show, :export]
+  before_action :get_history, only: [:history]
 
   # GET /locations
   # GET /locations.json
@@ -18,21 +19,11 @@ class LocationsController < ApplicationController
   end
   
   def history
-    @history = Location.find_by_sql(
-      ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
-      FROM documents d
-      JOIN lines l ON l.document_id = d.id
-      JOIN items i on i.id = l.item_id
-      WHERE d.location_id = ?
-      AND i.code = ?", params[:id], params[:item_code]])
-    @totals = Location.find_by_sql(
-      ["SELECT sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
-      FROM documents d
-      JOIN lines l ON l.document_id = d.id
-      JOIN items i on i.id = l.item_id
-      WHERE d.location_id = ?
-      AND i.code = ?", params[:id], params[:item_code]])   
-    @item = Item.find_by_code(params[:item_code])
+  end
+
+  def hpdf
+    pdf = HistoryPdf.new(params[:id], params[:item_code])
+    send_data pdf.render, filename: @location.name + "-" + params[:item_code] + ".pdf", type: 'application/pdf'
   end
   
   def export
@@ -120,5 +111,23 @@ class LocationsController < ApplicationController
       JOIN items i on i.id = l.item_id
       WHERE d.location_id = ?
       GROUP BY i.code, i.description", params[:id]])
+    end
+    
+    def get_history
+      @history = Location.find_by_sql(
+      ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      FROM documents d
+      JOIN lines l ON l.document_id = d.id
+      JOIN items i on i.id = l.item_id
+      WHERE d.location_id = ?
+      AND i.code = ?", params[:id], params[:item_code]])
+      @totals = Location.find_by_sql(
+      ["SELECT sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      FROM documents d
+      JOIN lines l ON l.document_id = d.id
+      JOIN items i on i.id = l.item_id
+      WHERE d.location_id = ?
+      AND i.code = ?", params[:id], params[:item_code]])   
+      @item = Item.find_by_code(params[:item_code])
     end
 end

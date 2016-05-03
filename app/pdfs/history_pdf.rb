@@ -1,40 +1,51 @@
 class HistoryPdf < Prawn::Document
-    def initialize(location, item_code)
-        super({:page_size => 'A4', :page_layout => :landscape})
-        @location = Location.find_by_id(location.id)
-        @documents = Document.where(location_id: location.id)
+    def initialize(location_id, item_code)
+        super({:page_size => 'A4', :page_layout => :portrait})
+        @location = Location.find_by_id(location_id)
         @item = Item.find_by_code(item_code)
-        @lines = Line.where(document_id: document.id, item_id: @item.id)
-
+        @history = Location.find_by_sql(
+        ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+        FROM documents d
+        JOIN lines l ON l.document_id = d.id
+        JOIN items i on i.id = l.item_id
+        WHERE d.location_id = ?
+        AND i.code = ?", location_id, item_code])
+        
         @line_total = 0
+        @qtynew_total = 0
+        @qtyused_total = 0
 
-        document_header
+        history_header
         move_down 20
-        document_rows
+        history_rows
         table_content
     end
 
-    def document_header
-        text " DOCUMENT CODE: " + @document.code, size: 20, style: :bold, align: :left
+    def history_header
+        text "ITEM: " + @item.code + " " + @item.description, size: 16, style: :bold, align: :left
         text "LOCATION: " + @location.name, size: 12, style: :bold, align: :left
-        text "USER: " + @user.username, size: 12, style: :bold, align: :left 
-        text "DATE: " + @document.docdate.to_s, size: 12, style: :bold, align: :left
     end
 
-    def document_rows
-        @lines.map do |l|
-            @item = Item.find_by_id(l.item_id)
-            @line_total = l.qtynew.to_s.to_d + l.qtyused.to_s.to_d
-            [@item.code,@item.description,l.qtynew,l.qtyused,@line_total,l.comment]
+    def history_rows
+        @history.map do |h|
+            @line_total = h.qtynew.to_s.to_d + h.qtyused.to_s.to_d
+            @qtynew_total += h.qtynew.to_s.to_d
+            @qtyused_total += h.qtyused.to_s.to_d
+            [h.code,h.qtynew.to_s.to_d,h.qtyused.to_s.to_d,@line_total]
         end
     end
 
+    def total_row
+        @line_total = @qtynew_total + @qtyused_total
+        ["TOTAL",@qtynew_total,@qtyused_total,@line_total]
+    end
+
     def line_header
-        ["ITEM CODE","ITEM DESCRIPTION","NEW","USED","TOTAL","COMMENT"]
+        ["DOCUMENT CODE","NEW","USED","TOTAL"]
     end
 
     def table_data
-        [line_header, *document_rows] 
+        [line_header, *history_rows, total_row] 
     end
 
     def table_content
@@ -43,7 +54,10 @@ class HistoryPdf < Prawn::Document
             self.row_colors = ["DDDDDD", "FFFFFF"]
             self.header = true
             self.cell_style = { size: 9 }
-            self.column_widths = [80,220,40,40,40,260]
+            self.column_widths = [120,40,40,40]
+            columns(1).align = :right
+            columns(2).align = :right
+            columns(3).align = :right
         end
     end
 end

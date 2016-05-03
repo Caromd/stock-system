@@ -19,6 +19,7 @@
         <td class="col-md-1"><%= item.qtynew %></td>
         <td class="col-md-1"><%= item.qtyused %></td>
         <td class="col-md-1"><%= item.total %></td>
+        <td class="col-md-1"><%= link_to 'PDF', hpdf_path(@location.id,item.code) %></td>
       </tr>
     <% end %>
   </tbody>
