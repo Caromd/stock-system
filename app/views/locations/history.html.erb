@@ -1,37 +1,35 @@
-<h1>ITEM: <%= params[:item_code] %> <%= @item_description.description %> LOCATION: <%= @location.name.upcase %></h1>
-<% @qtynew = 0 %>
-<% @qtyused = 0 %>
-<% @total = 0 %>
+<h1>ITEM: <%= params[:item_code] %> <%= @item.description %> LOCATION: <%= @location.name.upcase %></h1>
+
 <table>
   <thead>
     <tr>
       <th class="col-md-2">Document</th>
-      <th class="col-md-1">Qty New</th>
-      <th class="col-md-1">Qty Used</th>
-      <th class="col-md-1">Total</th>
+      <th class="col-md-1 right">Qty New</th>
+      <th class="col-md-1 right">Qty Used</th>
+      <th class="col-md-1 right">Total</th>
     </tr>
   </thead>
+
+  <tfoot class="totals">
+    <% @totals.each do |t| %>
+      <tr>
+        <td class="col-md-2">TOTAL</td>
+        <td class="col-md-1 right"><%= t.qtynew %></td>
+        <td class="col-md-1 right"><%= t.qtyused %></td>
+        <td class="col-md-1 right"><%= t.total %></td>
+      </tr>
+    <% end %>
+  </tfoot>
 
   <tbody>
     <% @history.each do |h| %>
       <tr>
         <td class="col-md-2"><%= h.code %></td>
-        <td class="col-md-1"><%= h.qtynew %></td>
-        <td class="col-md-1"><%= h.qtyused %></td>
-        <td class="col-md-1"><%= h.total %></td>
+        <td class="col-md-1 right"><%= h.qtynew %></td>
+        <td class="col-md-1 right"><%= h.qtyused %></td>
+        <td class="col-md-1 right"><%= h.total %></td>
       </tr>
-      <% @qtynew = @qtynew + h.qtynew.to_s.to_d %>
-      <% @qtyused = @qtyused + h.qtyused.to_s.to_d %>
-      <% @total = @total + h.total.to_s.to_d %>
     <% end %>
   </tbody>
+
 </table>
-<table>
-    <tr>
-       <td class="col-md-2">TOTAL: </td>
-       <td class="col-md-1"><%= @qtynew %></td>
-       <td class="col-md-1"><%= @qtyused %></td>
-       <td class="col-md-1"><%= @total %></td>
-    </tr>
-</table>
-    

@@ -30,12 +30,11 @@ body {
   background: #30372b;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: white;
-    font-weight: 100;
-}
+h1, h2, h3, h4, h5, h6 {color: white; font-weight: 100;}
 
 h1 {font-size: 1.5em;}
+
+tfoot.totals {border-top: 3px double #8c8b8b;}
 
 .container {
     width: 80%;
@@ -88,9 +87,7 @@ a {
     }
 }
 
-#right {
-  align: right;
-}
+.right {text-align: right;}
 
 /* All input fields */
 form input {
