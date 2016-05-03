@@ -31,7 +31,7 @@ class LocationsController < ApplicationController
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
       WHERE d.location_id = ?
-      AND i.code = ?", params[:id], params[:item_code]])     
+      AND i.code = ?", params[:id], params[:item_code]])   
     @item = Item.find_by_code(params[:item_code])
   end
   
@@ -111,7 +111,7 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).permit(:name)
     end
-    
+
     def item_summary
       @items = Location.find_by_sql(
       ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total

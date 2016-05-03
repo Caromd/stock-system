@@ -22,7 +22,7 @@
           <%= link_to('EDIT USER', edit_user_registration_path) %>
           <%= link_to('LOG OUT', destroy_user_session_path, :method => :delete) %>        
         <% else %>
-          <%= link_to "SIGN UP", new_user_registration_path %>
+          <%= link_to "CREATE USER", new_user_path %>
           <%= link_to('LOG IN', new_user_session_path)  %>
         <% end %>
       </nav>
