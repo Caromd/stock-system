@@ -17,7 +17,6 @@ class HistoryPdf < Prawn::Document
 
         history_header
         move_down 20
-        history_rows
         table_content
     end
 

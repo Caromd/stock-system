@@ -1,0 +1,27 @@
+<h1>USERS</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="col-md-3">Name</th>
+      <th class="col-md-1">Email</th>
+      <th class="col-md-1">Admin?</th>
+      <th class="col-md-1">Active?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td class="col-md-3"><%= link_to user.username, edit_user_path(user) %></td>
+        <td class="col-md-3"><%= user.email %></td>
+        <td class="col-md-1"><%= user.admin %></td>
+        <td class="col-md-1"><%= user.is_active %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path, id: "button" %>
