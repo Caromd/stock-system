@@ -4,7 +4,7 @@ class HistoryPdf < Prawn::Document
         @location = Location.find_by_id(location_id)
         @item = Item.find_by_code(item_code)
         @history = Location.find_by_sql(
-        ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+        ["SELECT d.code code, l.qtynew, l.qtyused, (COALESCE(l.qtynew,0) + COALESCE(l.qtyused,0)) total
         FROM documents d
         JOIN lines l ON l.document_id = d.id
         JOIN items i on i.id = l.item_id
