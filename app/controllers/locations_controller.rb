@@ -105,7 +105,7 @@ class LocationsController < ApplicationController
 
     def item_summary
       @items = Location.find_by_sql(
-      ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      ["SELECT i.code code, i.description description, sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(COALESCE(l.qtynew,0) + COALESCE(l.qtyused,0)) total
       FROM documents d
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
@@ -115,14 +115,14 @@ class LocationsController < ApplicationController
     
     def get_history
       @history = Location.find_by_sql(
-      ["SELECT d.code code, l.qtynew, l.qtyused, (IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      ["SELECT d.code code, l.qtynew, l.qtyused, (COALESCE(l.qtynew,0) + COALESCE(l.qtyused,0)) total
       FROM documents d
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
       WHERE d.location_id = ?
       AND i.code = ?", params[:id], params[:item_code]])
       @totals = Location.find_by_sql(
-      ["SELECT sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(IFNULL(l.qtynew,0) + IFNULL(l.qtyused,0)) total
+      ["SELECT sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(COALESCE(l.qtynew,0) + COALESCE(l.qtyused,0)) total
       FROM documents d
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
