@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authenticatable
   has_many :documents
+  
+  validates :username, presence: true, uniqueness: true
 
   attr_accessor :skip_password_validation  # virtual attribute to skip password validation while saving
 
