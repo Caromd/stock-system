@@ -9,7 +9,8 @@ class HistoryPdf < Prawn::Document
         JOIN lines l ON l.document_id = d.id
         JOIN items i on i.id = l.item_id
         WHERE d.location_id = ?
-        AND i.code = ?", location_id, item_code])
+        AND i.code = ?
+        ORDER BY d.code", location_id, item_code])
         
         @line_total = 0
         @qtynew_total = 0

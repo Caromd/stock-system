@@ -110,7 +110,8 @@ class LocationsController < ApplicationController
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
       WHERE d.location_id = ?
-      GROUP BY i.code, i.description", params[:id]])
+      GROUP BY i.code, i.description
+      ORDER BY i.code", params[:id]])
     end
     
     def get_history
@@ -120,7 +121,8 @@ class LocationsController < ApplicationController
       JOIN lines l ON l.document_id = d.id
       JOIN items i on i.id = l.item_id
       WHERE d.location_id = ?
-      AND i.code = ?", params[:id], params[:item_code]])
+      AND i.code = ?
+      ORDER BY d.code", params[:id], params[:item_code]])
       @totals = Location.find_by_sql(
       ["SELECT sum(l.qtynew) qtynew, sum(l.qtyused) qtyused, sum(COALESCE(l.qtynew,0) + COALESCE(l.qtyused,0)) total
       FROM documents d
