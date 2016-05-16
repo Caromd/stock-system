@@ -169,9 +169,8 @@ textarea {
 
 /* Changes the input blocks for document comment */
 [id*="document_comment"] {
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 50%;
+    margin: auto;
+    width: 100%;
 /*    height: 26px; */
     color: black;
     border-radius: 10px 10px 10px 10px;
@@ -183,7 +182,7 @@ textarea {
 /* Document lines blocks (all) */
 [id*="document_lines_attributes_"] {
     font-size: 1em;
-    width: 450px;
+    width: 36%;
     color: black;
 }
 
